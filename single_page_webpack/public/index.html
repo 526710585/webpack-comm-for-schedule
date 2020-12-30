@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="all">
+    <meta name="Copyright" content="Tencent">
+    <meta name="author" content="Tencent-CP">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" id="viewport"
+        content="initial-scale=1, viewport-fit = cover, maximum-scale=1, minimum-scale=1, user-scalable=no,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="keywords" content="<%= htmlWebpackPlugin.options.keywords %>">
+    <meta name="description" content="<%= htmlWebpackPlugin.options.description %>">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <script src="//tga.qq.com/common/js/mobile-detect.min.js"></script>
+    <script type="text/javascript" src="https://tga.qq.com/test/common/js/comm_h5.js"></script>
+    <script src="//ossweb-img.qq.com/images/js/mobile_bundle/util/zepto.js"></script>
+    <script src="https://cdn-go.cn/aegis/aegis-sdk/latest/aegis.min.js?bid=3977"></script>
+    <script>
+        /* eslint-disable */
+        try {
+            if (Aegis) {
+                const aegis = new Aegis({
+                    id: '<%= htmlWebpackPlugin.options.aegisId %>', // 项目ID
+                    reportApiSpeed: true, // 接口测速
+                    reportAssetSpeed: true, // 静态资源测速
+                });
+                aegis.info('string'); // 上报
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    /* eslint-enable */
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="left-box">
+            <!-- 常见问题 -->
+            <p class="icon title"></p>
+            <div class="question-list">
+                <!-- <p class="question-item hot">问题详情短文字不带图</p>
+            <p class="question-item hot">问题详情长文字不带图</p>
+            <p class="question-item hot">问题详情短文字带图</p>
+            <p class="question-item hot">问题详情长文字带图</p>
+            <p class="question-item">消耗荣耀币后没有成为会员？</p>
+            <p class="question-item">消耗荣耀币后没有成为会员？</p>
+            <p class="question-item">消耗荣耀币后没有成为会员？</p>
+            <p class="question-item">消耗荣耀币后没有成为会员？</p>
+            <p class="question-item">消耗荣耀币后没有成为会员？</p>
+            <p class="question-item">消耗荣耀币后没有成为会员？</p>
+            <p class="question-item">消耗荣耀币后没有成为会员？</p>
+            <p class="question-item">消耗荣耀币后没有成为会员？</p> -->
+            </div>
+        </div>
+        <div class="right-box">
+            <!-- 我要反馈 -->
+            <p class="icon title"></p>
+            <div class="feedback-content">
+                <div class="type feedback-item">
+                    <p>问题类型</p>
+                    <div class="type-list">
+                        <!-- <div class="type-item active">
+                        红点/弹窗骚扰
+                    </div>
+                    <div class="type-item">
+                        弹幕/聊天
+                    </div>
+                    <div class="type-item">
+                        直播内容
+                    </div>
+                    <div class="type-item">
+                        新人/回归任务
+                    </div>
+                    <div class="type-item">
+                        弹幕/聊天
+                    </div>
+                    <div class="type-item">
+                        弹幕/聊天
+                    </div>
+                    <div class="type-item">
+                        弹幕/聊天
+                    </div>
+                    <div class="type-item">
+                        弹幕/聊天
+                    </div>
+                    <div class="type-item">
+                        弹幕/聊天
+                    </div> -->
+                    </div>
+                </div>
+                <div class="description feedback-item">
+                    <p>具体描述</p>
+                    <textarea placeholder="欢迎留下更详细的描述，吐槽或者建议" class="description-item"></textarea>
+                </div>
+                <div class="contact feedback-item">
+                    <p>联系方式</p>
+                    <textarea placeholder="欢迎留下更详细的描述，吐槽或者建议" class="contact-item"></textarea>
+                </div>
+            </div>
+            <a href="javascript:;" class="submit">提交</a>
+            <span class="tga-version">v60006108</span>
+        </div>
+    </div>
+
+    <div class="dialog__wrapper" style="display: none;">
+        <div class="dialog">
+            <a href="javascript:;" class="close"></a>
+            <p class="question">怎么关闭礼物特效?</p>
+            <div class="answer">
+                <p class="text">
+                </p>
+            </div>
+            <img src="./img/game.png" alt="">
+        </div>
+    </div>
+    <!-- <div class="dialog__wrapper img-item">
+        <div class="dialog">
+            <a href="javascript:;" class="close"></a>
+            <p class="question">怎么关闭礼物特效?</p>
+            <div class="answer">
+                <p class="text">
+                    您可以点击啦啦啦啦啦,设置礼物特效的显示或隐藏,设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏设置礼物特效的显示或隐藏
+                </p>
+            </div>
+            <img src="./img/game.png" alt="">
+        </div>
+    </div> -->
+    <div class="toast" style="display: none;">
+        <div class="toast-l"></div>
+        <p class="toast-text toast-c"></p>
+        <div class="toast-r"></div>
+    </div>
+</body>
+<% if (htmlWebpackPlugin.options.needVconsole) { %>
+    <script src="//tga.qq.com/common/js/vconsole.min.js"></script>
+<% } %>
+<script src="https://ossweb-img.qq.com/images/js/PTT/ping_tcss_tgideas_https_min.js"></script>
+<script>
+    /* eslint-disable */
+    // 此段代码不能放到外链JS中，
+    const setSite = { // 设置网站属性
+        siteType: 'a20200317tv', // 必填项:"os"代表是官网，如果不是，则填写actName例如a20160701xxx
+        pageType: 'main', // 必填项:本页面的定位；按照页面含义填写例如main||list||detail||download||share||page1||pageN
+        pageName: '<%= htmlWebpackPlugin.options.title %>', // 必填项:页面中文名
+        osact: 0, // 选填项:是否是官网专题(在官网运营的专题)boolean；默认是0；可以在链接上加入参数osact=1来灵活设置
+        ingame: 0, // 选填项:是否投放在游戏APP内boolean；默认是0；可以在链接上加入参数ingame=1来灵活设置
+        stayTime: 0, // 选填项:是否需要统计停留时长boolean；默认是0
+    };
+    if (typeof (pgvMain) === 'function') pgvMain(); // 千万不能忘记！
+  /* eslint-enable */
+</script>
+
+</html>
