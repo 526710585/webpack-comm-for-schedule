@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="all">
+    <meta name="Copyright" content="Tencent">
+    <meta name="author" content="Tencent-CP">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="keywords" content="腾讯,腾讯游戏,王者荣耀,王者荣耀赛事,世界冠军杯">
+    <meta name="description" content="王者荣耀世界冠军杯（简称KCC）是官方最高规格专业晋级赛事。2020年王者荣耀世界冠军杯将于6月22日开启。比赛分为小组赛、淘汰赛及总决赛三部分。">
+    <title>2020世界冠军杯比赛对阵图</title>
+    <!-- 页面设计：深圳欣米 | 页面制作：深圳欣米 | 创建：2020-06-16 -->
+    <script>
+        //屏幕适应 
+        (function (win, doc) {
+            if (!win.addEventListener) return;
+
+            function setFont() {
+                var html = document.documentElement;
+                var k = 750;
+                html.style.fontSize = html.clientWidth / k * 100 + "px";
+            }
+            setFont();
+            setTimeout(function () {
+                setFont();
+            }, 300);
+            doc.addEventListener('DOMContentLoaded', setFont, false);
+            win.addEventListener('resize', setFont, false);
+            win.addEventListener('load', setFont, false);
+        })(window, document);
+    </script>
+    <link rel="stylesheet" href="css/comm_v.css" charset="utf-8">
+    <script src="https://cdn-go.cn/aegis/aegis-sdk/latest/aegis.min.js?bid=3977"></script>
+    <script src="js/vconsole.min.js"></script>
+    <script>
+        // 初始化
+        var vConsole = new VConsole();
+      </script>
+</head>
+
+<body>
+    <div class="g-wrap">
+        <div class="hd-title">2020王者荣耀世界冠军杯</div>
+        <div class="match-type">
+            <a href="javascript:;" onclick="PTTSendClick('btn','xbs','选拔赛')" class="xbstab" data-type="1">选拔赛</a>
+            <a href="javascript:;" onclick="PTTSendClick('btn','xzs','小组赛')" class="xzstab" data-type="2">小组赛</a>
+            <a href="javascript:;" onclick="PTTSendClick('btn','tts','淘汰赛')" class="ttstab" data-type="3">淘汰赛</a>
+            <a href="javascript:;" onclick="PTTSendClick('btn','wzsz','完整赛制')" class="wzsz">完整赛制</a>
+        </div>
+
+        <!-- 选拔赛 -->
+        <div class="xbs-cont" id="xbs-cont" data-type-c="1">
+            <div class="ylxb-box">
+                <div class="hd">一轮选拔赛对阵情况</div>
+                <div class="kpl-con">
+                    <p class="match-area">KPL赛区</p>
+                    <div class="bat-area">
+                        <div class="bat-item" v-for="battle in kpl_battle_list" :key="battle.scheduleid">
+                            <div class="team" :class="getBattleState(1,battle)">
+                                <div class="team-nl">
+                                    <div class="logo-box">
+                                        <img :src="battle.host_id?`ossweb-img/logo/${battle.host_id}.png`:''" alt="">
+                                    </div>
+                                    <p class="name">{{battle.hname}}</p>
+                                </div>
+                                <div class="score">{{battle.host_score}}</div>
+                            </div>
+                            <span class="bt-line"></span>
+                            <div class="team r" :class="getBattleState(2,battle)">
+                                <div class="score">{{battle.guest_score}}</div>
+                                <div class="team-nl">
+                                    <div class="logo-box">
+                                        <img :src="battle.guest_id?`ossweb-img/logo/${battle.guest_id}.png`:''" alt="">
+                                    </div>
+                                    <p class="name">{{battle.gname}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="kplgt-con">
+                    <p class="match-area">KPLGT赛区</p>
+                    <div class="bat-area">
+                        <div class="bat-item" v-for="battle in kplgt_battle_list" :key="battle.scheduleid">
+                            <div class="team" :class="getBattleState(1,battle)">
+                                <div class="team-nl">
+                                    <div class="logo-box">
+                                        <img :src="battle.host_id?`ossweb-img/logo/${battle.host_id}.png`:''" alt="">
+                                    </div>
+                                    <p class="name">{{battle.hname}}</p>
+                                </div>
+                                <div class="score">{{battle.host_score}}</div>
+                            </div>
+                            <span class="bt-line"></span>
+                            <div class="team r" :class="getBattleState(2,battle)">
+                                <div class="score">{{battle.guest_score}}</div>
+                                <div class="team-nl">
+                                    <div class="logo-box">
+                                        <img :src="battle.guest_id?`ossweb-img/logo/${battle.guest_id}.png`:''" alt="">
+                                    </div>
+                                    <p class="name">{{battle.gname}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="elxb-box">
+                <div class="hd">二轮选拔赛积分榜</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>战队</th>
+                            <th>胜场/败场</th>
+                            <th>积分</th>
+                        </tr>
+                    </thead>
+                    <tbody v-if="xbs_rank_list.length>0">
+                        <tr v-for="(team, index) in xbs_rank_list" :class="xbs_battle_state&&index<4?'bg-d':''">
+                            <td>
+                                <div class="rank"
+                                    :class="xbs_battle_state&&index<4?`rank${index+1}-g`:`rank${index+1}`"></div>
+                            </td>
+                            <td class="team-nl">
+                                <div class="logo-box">
+                                    <img :src="team.teamid?`ossweb-img/logo/${team.teamid}.png`:''" alt="">
+                                </div>
+                                <span class="name">{{team.name}}</span>
+                            </td>
+                            <td class="record">{{team.win}}/{{team.lose}}</td>
+                            <td class="score">{{team.points}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="rule-desc">
+                <div class="hd">规则说明</div>
+                <div class="con">
+                    <p>一轮选拔赛</p>
+                    <p class="indent">BO7单淘汰制，胜者<span>晋级小组赛</span>，败者进入<span>二轮选拔赛</span>。</p>
+                    <p>二轮选拔赛</p>
+                    <p class="indent">BO1单循环赛，积分排名前四名的队伍<span>晋级小组赛</span>。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 小组赛 -->
+        <div class="xzs-cont" id="xzs-cont" data-type-c="2">
+            <div class="group-a">
+                <div class="g-title">A组</div>
+                <table class="atable">
+                    <thead>
+                        <tr>
+                            <th class="rank">排名</th>
+                            <th class="team">战队</th>
+                            <th class="wl">胜-负(场)</th>
+                            <th class="score">胜-负(局)</th>
+                            <th class="jscore">积分</th>
+                        </tr>
+                    </thead>
+                    <tbody v-show="xzs_rank_list.A&&xzs_rank_list.A.length>0">
+                        <!-- 最终确定：final -->
+                        <tr :class="xzs_battle_state&&index<4?`final`:``" v-for="(team, index) in xzs_rank_list.A">
+                            <td>
+                                <!-- 红标排行：rank1-g rank2-g......   普通标：rank1..... -->
+                                <div class="rank" :class="xzs_battle_state&&index<4?`rank${index+1}-g`:`rank${index+1}`"></div>
+                            </td>
+                            <td>
+                                <div class="logo">
+                                    <img :src="team.teamid?`ossweb-img/logo/${team.teamid}.png`:''" alt="">
+                                </div>
+                                <span class="name">{{team.name}}</span>
+                            </td>
+                            <td>{{team.win}}-{{team.lose}}</td>
+                            <td>{{team.win_match}}-{{team.lost_match}}</td>
+                            <td>{{team.points}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="group-b">
+                <div class="g-title">B组</div>
+                <table class="btable">
+                    <thead>
+                        <tr>
+                            <th class="rank">排名</th>
+                            <th class="team">战队</th>
+                            <th class="wl">胜-负(场)</th>
+                            <th class="score">胜-负(局)</th>
+                            <th class="jscore">积分</th>
+                        </tr>
+                    </thead>
+                    <tbody v-show="xzs_rank_list.B&&xzs_rank_list.B.length>0">
+                        <!-- 最终确定：final -->
+                        <tr :class="xzs_battle_state&&index<4?`final`:``" v-for="(team, index) in xzs_rank_list.B">  
+                            <td>
+                                <!-- 红标排行：rank1-g rank2-g......   普通标：rank1..... -->
+                                <div class="rank" :class="xzs_battle_state&&index<4?`rank${index+1}-g`:`rank${index+1}`"></div>
+                            </td>
+                            <td>
+                                <div class="logo">
+                                    <img :src="team.teamid?`ossweb-img/logo/${team.teamid}.png`:''" alt="">
+                                </div>
+                                <span class="name">{{team.name}}</span>
+                            </td>
+                            <td>{{team.win}}-{{team.lose}}</td>
+                            <td>{{team.win_match}}-{{team.lost_match}}</td>
+                            <td>{{team.points}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="rule-exp">
+                <em>规则说明：</em>
+                <span>两赛区春季赛冠军分别进入A、B两组，其余队伍抽签决定组别。组内进行BO3单循环赛，积分前四的队伍晋级。淘汰队伍位列本届世界冠军杯并列第九名。</span>
+            </p>
+        </div>
+
+        <!-- 淘汰赛 -->
+        <div class="tts-cont" id="tts-cont" data-type-c="3">
+            <div class="quarter">
+                <div class="arrow1"></div>
+                <div class="arrow1"></div>
+                <div class="group" v-if="onefourfinal_list[1]">
+                    <!-- 胜者添加class：win -->
+                    <div class="team" :class="onefourfinal_list[1].match_state==4&&onefourfinal_list[1].host_score>onefourfinal_list[1].guest_score?'win':''">
+                        <div class="logo">
+                            <img :src="onefourfinal_list[1].host_id?`ossweb-img/logo/${onefourfinal_list[1].host_id}.png`:''" alt="">
+                        </div>
+                        <div class="name">{{onefourfinal_list[1].hname}}</div>
+                        <div class="score">{{onefourfinal_list[1].host_score}}</div>
+                    </div>
+                    <div class="team" :class="onefourfinal_list[1].match_state==4&&onefourfinal_list[1].host_score<onefourfinal_list[1].guest_score?'win':''">
+                        <div class="logo">
+                            <img :src="onefourfinal_list[1].guest_id?`ossweb-img/logo/${onefourfinal_list[1].guest_id}.png`:''" alt="">
+                        </div>
+                        <div class="name">{{onefourfinal_list[1].gname}}</div>
+                        <div class="score">{{onefourfinal_list[1].guest_score}}</div>
+                    </div>
+                    <div class="date">{{transformDate(onefourfinal_list[1].match_time)}}</div>
+                </div>
+                <div class="group" v-if="onefourfinal_list[3]">
+                    <!-- 胜者添加class：win -->
+                    <div class="team" :class="onefourfinal_list[3].match_state==4&&onefourfinal_list[3].host_score>onefourfinal_list[3].guest_score?'win':''">
+                        <div class="logo">
+                            <img :src="onefourfinal_list[3].host_id?`ossweb-img/logo/${onefourfinal_list[3].host_id}.png`:''" alt="">
+                        </div>
+                        <div class="name">{{onefourfinal_list[3].hname}}</div>
+                        <div class="score">{{onefourfinal_list[3].host_score}}</div>
+                    </div>
+                    <div class="team" :class="onefourfinal_list[3].match_state==4&&onefourfinal_list[3].host_score<onefourfinal_list[3].guest_score?'win':''">
+                        <div class="logo">
+                            <img :src="onefourfinal_list[3].guest_id?`ossweb-img/logo/${onefourfinal_list[3].guest_id}.png`:''" alt="">
+                        </div>
+                        <div class="name">{{onefourfinal_list[3].gname}}</div>
+                        <div class="score">{{onefourfinal_list[3].guest_score}}</div>
+                    </div>
+                    <div class="date">{{transformDate(onefourfinal_list[3].match_time)}}</div>
+                </div>
+                <div class="group" v-if="onefourfinal_list[0]">
+                    <!-- 胜者添加class：win -->
+                    <div class="team" :class="onefourfinal_list[0].match_state==4&&onefourfinal_list[0].host_score>onefourfinal_list[0].guest_score?'win':''">
+                        <div class="logo">
+                            <img :src="onefourfinal_list[0].host_id?`ossweb-img/logo/${onefourfinal_list[0].host_id}.png`:''" alt="">
+                        </div>
+                        <div class="name">{{onefourfinal_list[0].hname}}</div>
+                        <div class="score">{{onefourfinal_list[0].host_score}}</div>
+                    </div>
+                    <div class="team" :class="onefourfinal_list[0].match_state==4&&onefourfinal_list[0].host_score<onefourfinal_list[0].guest_score?'win':''">
+                        <div class="logo">
+                            <img :src="onefourfinal_list[0].guest_id?`ossweb-img/logo/${onefourfinal_list[0].guest_id}.png`:''" alt="">
+                        </div>
+                        <div class="name">{{onefourfinal_list[0].gname}}</div>
+                        <div class="score">{{onefourfinal_list[0].guest_score}}</div>
+                    </div>
+                    <div class="date">{{transformDate(onefourfinal_list[0].match_time)}}</div>
+                </div>
+                <div class="group" v-if="onefourfinal_list[2]">
+                    <!-- 胜者添加class：win -->
+                    <div class="team" :class="onefourfinal_list[2].match_state==4&&onefourfinal_list[2].host_score>onefourfinal_list[2].guest_score?'win':''">
+                        <div class="logo">
+                            <img :src="onefourfinal_list[2].host_id?`ossweb-img/logo/${onefourfinal_list[2].host_id}.png`:''" alt="">
+                        </div>
+                        <div class="name">{{onefourfinal_list[2].hname}}</div>
+                        <div class="score">{{onefourfinal_list[2].host_score}}</div>
+                    </div>
+                    <div class="team" :class="onefourfinal_list[2].match_state==4&&onefourfinal_list[2].host_score<onefourfinal_list[2].guest_score?'win':''">
+                        <div class="logo">
+                            <img :src="onefourfinal_list[2].guest_id?`ossweb-img/logo/${onefourfinal_list[2].guest_id}.png`:''" alt="">
+                        </div>
+                        <div class="name">{{onefourfinal_list[2].gname}}</div>
+                        <div class="score">{{onefourfinal_list[2].guest_score}}</div>
+                    </div>
+                    <div class="date">{{transformDate(onefourfinal_list[2].match_time)}}</div>
+                </div>
+            </div>
+            <div class="semifinals">
+                <div class="arrow2"></div>
+                <div class="group" v-for="match in semifinal_list" :key="match.scheduleid">
+                    <!-- 胜者添加class：win -->
+                    <div class="team" :class="match.match_state==4&&match.host_score>match.guest_score?'win':''">
+                        <div class="logo">
+                            <img :src="match.host_id?`ossweb-img/logo/${match.host_id}.png`:''" alt="">
+                        </div>
+                        <div class="name">{{match.hname}}</div>
+                        <div class="score">{{match.host_score}}</div>
+                    </div>
+                    <div class="team" :class="match.match_state==4&&match.host_score<match.guest_score?'win':''">
+                        <div class="logo">
+                            <img :src="match.guest_id?`ossweb-img/logo/${match.guest_id}.png`:''" alt="">
+                        </div>
+                        <div class="name">{{match.gname}}</div>
+                        <div class="score">{{match.guest_score}}</div>
+                    </div>
+                    <div class="date">{{transformDate(match.match_time)}} <span>半决赛</span></div>
+                </div>
+            </div>
+            <div class="finals">
+                <div class="zzscup"></div>
+                <div class="group">
+                    <!-- 胜者添加class：win -->
+                    <div class="team" :class="finals_list.match_state==4&&finals_list.host_score>finals_list.guest_score?'win':''">
+                        <div class="logo">
+                            <img :src="finals_list.host_id?`ossweb-img/logo/${finals_list.host_id}.png`:''" alt="">
+                        </div>
+                        <div class="name">{{finals_list.hname}}</div>
+                        <div class="score">{{finals_list.host_score}}</div>
+                    </div>
+                    <div class="team" :class="finals_list.match_state==4&&finals_list.host_score<finals_list.guest_score?'win':''">
+                        <div class="logo">
+                            <img :src="finals_list.guest_id?`ossweb-img/logo/${finals_list.guest_id}.png`:''" alt="">
+                        </div>
+                        <div class="name">{{finals_list.gname}}</div>
+                        <div class="score">{{finals_list.guest_score}}</div>
+                    </div>
+                    <div class="date">{{transformDate(finals_list.match_time)}}</div>
+                </div>
+            </div>
+            <div class="rule-exp">
+                <span>规则说明：</span>BO7单淘汰赛，小组赛名次靠前队伍优先选边。
+            </div>
+        </div>
+    </div>
+    <div class="dia wzsz-cont" id="wzsz">
+        <img src="ossweb-img/wzsz-img-v.png" alt="">
+        <a class="dia-close" href="javascript:;" title="关闭">×</a>
+    </div>
+    <div class="toast xzsToast">
+        <img src="ossweb-img/toast.png" style="width: 100%;height: 100%;" alt="">
+        <span>小组赛对阵图将在后续开放，敬请期待</span>
+    </div>
+    <div class="toast ttsToast">
+        <img src="ossweb-img/toast.png" style="width: 100%;height: 100%;" alt="">
+        <span>淘汰赛对阵图将在后续开放，敬请期待</span>
+    </div>
+    <script src="//open.mobile.qq.com/sdk/qqapi.https.js"></script>
+    <script src="//ossweb-img.qq.com/images/js/zepto/zepto.min.js"></script>
+    <script src="//ossweb-img.qq.com/images/js/mobile_bundle/milo.js"></script>
+    <script src="//ossweb-img.qq.com/images/js/eas/eas.js"></script>
+    <script src="js/mobile-detect.min.js"></script>
+    <script src="https://tga.qq.com/test/common/js/comm_h5.js"></script>
+    <script src="//tga.qq.com/test/common/js/vconsole.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/comm.js"></script>
+    <script src="js/login_msdk.js"></script>
+    <script src="js/main.js"></script>
+    <!-- 通用统计代码(1)，跳转链接或者功能按钮按需加上PTTSendClick('btn','start','开始游戏') -->
+    <script src="//ossweb-img.qq.com/images/js/PTT/ping_tcss_tgideas_https_min.js"></script>
+    <script>
+        const aegis = new Aegis({
+            id: 2715, // 项目ID
+            //uin: '' // 用户唯一 ID（可选）
+            reportApiSpeed: true, // 接口测速
+            reportAssetSpeed: true // 静态资源测速
+        })
+        aegis.info('string'); //上报
+
+        shineLandscape.init({
+            direction: 'y', //{string}页面正常显示的方向，默认：y
+            img: 'https://ossweb-img.qq.com/images/js/landscape/landscape.png', //{string}自定义图片，不设置将使用默认图
+            imgWidth: '128px', //{string}自定义图片宽度，默认128px
+            bgColor: '#32373b', //{string}背景颜色，默认：#32373b
+            txt: '为了更好的体验，请将手机/平板竖过来', //{string}自定义提示文字，默认：'为了更好的体验，请将手机/平板竖(横)过来'
+            txtColor: '#fff', //{string}提示文字颜色，默认：'#ffd40a'
+            txtSize: '16px', //{string}提示文字大小，默认：'18px'
+            zIndex: 1, //{number}层级覆盖z-index值,默认99999
+            initBack: function (direction) { //初始化完毕执行，返回当前方向字符串{x,y}
+                console.log('初始化完毕，当前页面方向为：' + direction)
+            },
+            changeDirection: function (direction) { //方向发生改变时，返回当前方向字符串{x,y}
+                console.log('方向已改变为：', direction)
+            },
+            curDirectionY: function () { //当前方向为 Y 时执行
+                console.log('当前页面方向：Y')
+            },
+            curDirectionX: function () { //当前方向为 X 时执行
+                console.log('当前页面方向：X')
+            }
+        })
+        var setSite = {
+            siteType: "a20200616world",
+            pageType: "index",
+            pageName: "首页",
+            osact: 0,
+            ingame: 0,
+            stayTime: 0
+        };
+        if (typeof (pgvMain) == 'function') pgvMain();
+    </script>
+</body>
+
+</html>
