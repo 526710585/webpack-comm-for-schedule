@@ -1,9 +1,9 @@
 import '../style.css';
 
 $(() => {
-  const base_url = 'https://app.tga.qq.com';
-  const rank_url = `${base_url}/openapi/tgabank/getKplTeamRank?appid=10005&sign=K8tjxlHDt7HHFSJTlxxZW4A%2BalA%3D`;
-  const match_results_url = `${base_url}/openapi/tgabank/getSchedules?appid=10005&sign=K8tjxlHDt7HHFSJTlxxZW4A%2BalA%3D`;
+  const baseUrl = 'https://app.tga.qq.com';
+  const rankUrl = `${baseUrl}/openapi/tgabank/getKplTeamRank?appid=10005&sign=K8tjxlHDt7HHFSJTlxxZW4A%2BalA%3D`;
+  const matchResultsUrl = `${baseUrl}/openapi/tgabank/getSchedules?appid=10005&sign=K8tjxlHDt7HHFSJTlxxZW4A%2BalA%3D`;
 
   const FILTER_LIST = [
     'KCC2019W_ag',
@@ -13,20 +13,20 @@ $(() => {
     'KCC2019W_gog',
     'KCC2019W_rox'];
 
-  const COUNTRY_OBJ = {
-    // 中国
-    KCC2019W_xq: 'flag_icon1.jpg',
-    KCC2019W_estar: 'flag_icon1.jpg',
-    KCC2019W_hero: 'flag_icon1.jpg',
-    KCC2019W_rw: 'flag_icon1.jpg',
-    KCC2019W_ts: 'flag_icon1.jpg',
-    // 香港
-    KCC2019W_cw: 'flag_icon3.jpg',
-    // 澳门
-    KCC2019W_emc: 'flag_icon4.jpg',
-    // 欧盟
-    KCC2019W_nova: 'flag_icon6.jpg',
-  };
+  // const COUNTRY_OBJ = {
+  //   // 中国
+  //   KCC2019W_xq: 'flag_icon1.jpg',
+  //   KCC2019W_estar: 'flag_icon1.jpg',
+  //   KCC2019W_hero: 'flag_icon1.jpg',
+  //   KCC2019W_rw: 'flag_icon1.jpg',
+  //   KCC2019W_ts: 'flag_icon1.jpg',
+  //   // 香港
+  //   KCC2019W_cw: 'flag_icon3.jpg',
+  //   // 澳门
+  //   KCC2019W_emc: 'flag_icon4.jpg',
+  //   // 欧盟
+  //   KCC2019W_nova: 'flag_icon6.jpg',
+  // };
 
   const IMG_LIST = {
     KCC2019W_nova: '//imgcache-1251786003.image.myqcloud.com/media/gzhoss/image/20190828/46143084ad0d5fa37b4fa9c393646000.png',
@@ -58,14 +58,14 @@ $(() => {
       return new Promise((resolve, reject) => {
         $.ajax({
           type: 'GET',
-          url: rank_url,
+          url: rankUrl,
           data: {
             seasonid,
             stage,
           },
           dataType: 'json',
           success(res) {
-            if (res.result != 0) {
+            if (res.result !== 0) {
               reject();
             }
             resolve(res.data);
@@ -86,46 +86,47 @@ $(() => {
     // },
     objSort(obj, str) {
       const arr = [];
-      for (const i in obj) {
-        arr.push(obj[i]);
-      }
+      Object.keys(obj).forEach((value) => {
+        arr.push(obj[value]);
+      });
       arr.sort((a, b) => a[str] - b[str]);
       return arr;
     },
-    isIPhoneX(fn) {
+    isIPhoneX() {
       const u = navigator.userAgent;
       const isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); // ios终端
       if (isIOS) {
-        if (screen.height == 812 && screen.width == 375) {
+        if (screen.height === 812 && screen.width === 375) {
           // 是iphoneX
           $('.sc_main').addClass('iphoneX');
         }
       }
     },
     filterTeam(arr) {
-      const newArr =  arr.filter(item => FILTER_LIST.indexOf(item.teamid) == -1);
+      const newArr =  arr.filter(item => FILTER_LIST.indexOf(item.teamid) === -1);
       return newArr;
     },
     replaceImg(obj) {
-      for (const key in IMG_LIST) {
-        const imgUrl = IMG_LIST[key];
-        obj[key].logo = imgUrl;
-      }
-      return obj;
+      const data = obj;
+      Object.keys(IMG_LIST).forEach((value) => {
+        const imgUrl = IMG_LIST[value];
+        data[value].logo = imgUrl;
+      });
+      return data;
     },
-    getMatchFun(seasonid, begin_time, end_time) {
+    getMatchFun(seasonid, beginTime, endTime) {
       return new Promise((resolve, reject) => {
         $.ajax({
-          url: match_results_url,
+          url: matchResultsUrl,
           data: {
             seasonid,
-            begin_time,
-            end_time,
+            begin_time: beginTime,
+            end_time: endTime,
           },
           type: 'GET',
           dataType: 'json',
           success(res) {
-            if (res.result != 0) {
+            if (res.result !== 0) {
               reject();
             }
             resolve(res.data);
