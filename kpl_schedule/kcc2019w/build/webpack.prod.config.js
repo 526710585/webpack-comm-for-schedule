@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-12-31 10:31:18
+ * @LastEditTime: 2020-12-31 10:51:26
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \webpack-comm-for-schedule\kpl_schedule\kcc2019w\build\webpack.prod.config.js
+ */
 'use strict'
 process.env.NODE_ENV = 'production'
 const { merge } = require('webpack-merge');
@@ -5,7 +13,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const baseWebpackConfig = require('./webpack.base.config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const path = require('path');
+const prodWebpackConfig = require('../../../single_page_webpack/build/webpack.prod.config')
 
 const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
