@@ -76,14 +76,14 @@ $(() => {
         });
       });
     },
-    // renderRank:async function () {
-    //     var data = await this.getRankFun('KCC2019W', 'xbs');
-    //     data = this.replaceImg(data);
-    //     data = this.objSort(data, "order");
-    //     data = this.filterTeam(data);
-    //     var html = template('rankTemplate',{data});
-    //     $('.rank_list').html(html);
-    // },
+    async renderRank() {
+      let data = await this.getRankFun('KCC2019W', 'xbs');
+      data = this.replaceImg(data);
+      data = this.objSort(data, 'order');
+      data = this.filterTeam(data);
+      const html = template('rankTemplate', { data });
+      $('.rank_list').html(html);
+    },
     objSort(obj, str) {
       const arr = [];
       Object.keys(obj).forEach((value) => {
