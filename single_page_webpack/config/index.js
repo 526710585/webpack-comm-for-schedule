@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-12-30 20:37:15
- * @LastEditTime: 2020-12-30 20:59:04
- * @LastEditors: your name
+ * @LastEditTime: 2021-01-03 17:38:02
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \webpack-comm-for-schedule\single_page_webpack\config\index.js
  */
@@ -34,7 +34,7 @@ module.exports = {
   },
   build: {
     assetsPublicPath: './',
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot: 'dist',
     // 页面标题
     title: '王者荣耀电视台',
     // 上报的项目ID

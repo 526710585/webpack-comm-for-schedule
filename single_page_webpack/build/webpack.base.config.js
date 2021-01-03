@@ -1,24 +1,24 @@
 /*
  * @Author: your name
  * @Date: 2020-12-30 20:44:27
- * @LastEditTime: 2021-01-03 17:26:49
+ * @LastEditTime: 2021-01-03 17:39:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \webpack-comm-for-schedule\single_page_webpack\build\webpack.base.config.js
  */
 const path = require('path');
 const config = require('../config');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 module.exports = function createWebpackConfig(_path) {
   return {
     mode: 'test',
     entry: {
-      index: './src/js/index.js',
+      index: path.resolve(_path, './src/js/index.js'),
     },
     output: {
-      path: config.build.assetsRoot,
+      path: path.resolve(_path, config.build.assetsRoot),
       chunkFilename: 'js/[name].chunk.js',
       filename: 'js/[name].js',
       publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
@@ -98,15 +98,15 @@ module.exports = function createWebpackConfig(_path) {
     },
     plugins: [
       // HTML文件
-      // new HtmlWebpackPlugin({
-      //   template: './public/index.html',
-      //   inject: 'body',
-      //   title: config.build.title,
-      //   description: config.build.description,
-      //   keywords: config.build.keywords,
-      //   needVconsole: process.env.NODE_ENV !== 'production',
-      //   aegisId: config.build.aegisId,
-      // })
+      new HtmlWebpackPlugin({
+        template: path.resolve(_path, 'src/index.html'),
+        inject: 'body',
+        title: config.build.title,
+        description: config.build.description,
+        keywords: config.build.keywords,
+        needVconsole: process.env.NODE_ENV !== 'production',
+        aegisId: config.build.aegisId,
+      }),
     ],
   };
 };
