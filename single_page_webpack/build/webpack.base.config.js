@@ -1,14 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2020-12-30 20:44:27
- * @LastEditTime: 2020-12-30 22:43:46
+ * @LastEditTime: 2021-01-03 17:26:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \webpack-comm-for-schedule\single_page_webpack\build\webpack.base.config.js
  */
 const path = require('path');
 const config = require('../config');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 module.exports = function createWebpackConfig(_path) {
